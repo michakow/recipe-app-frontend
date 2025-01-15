@@ -14,16 +14,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'recipe-app-frontend' title`, () => {
+  it(`should have the 'New app with Angular' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('recipe-app-frontend');
+    expect(app.title).toEqual('New app with Angular');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, recipe-app-frontend');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Hello, New app with Angular'
+    );
   });
 });
