@@ -1,0 +1,17 @@
+name: Deploy on Netlify
+
+inputs:
+  github-token:
+    description: "GitHub token"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v3.0
+      with:
+        publish-dir: "./dist/recipe-app-frontend/browser"
+        production-branch: main
+        github-token: ${{ inputs.github-token }}
+        deploy-message: "Deploy from GitHub Actions"
