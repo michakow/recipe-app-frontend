@@ -12,6 +12,6 @@ runs:
       uses: nwtgck/actions-netlify@v3.0
       with:
         publish-dir: "./dist/recipe-app-frontend/browser"
-        production-branch: main
+        production-branch: dev
         github-token: ${{ inputs.github-token }}
         deploy-message: "Deploy from GitHub Actions"
