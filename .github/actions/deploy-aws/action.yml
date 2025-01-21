@@ -28,3 +28,4 @@ runs:
       run: |
         aws s3 sync ./dist/recipe-app-frontend/browser s3://recipe-app-frontend
         aws cloudfront create-invalidation --distribution-id ${{ inputs.aws-cloudfront-distribution-id }} --paths "/*"
+      shell: bash
