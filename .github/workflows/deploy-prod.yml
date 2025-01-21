@@ -22,10 +22,23 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy AWS
-        uses: ./.github/actions/deploy-aws
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-          aws-cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+          aws-region: eu-central-1
+
+      - name: Deploy AWS PROD
+        run: |
+          aws s3 sync ./dist/recipe-app-frontend/browser s3://recipe-app-frontend
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID}} --paths "/*"
+        shell: bash
+
+      # - name: Deploy AWS
+      #   uses: ./.github/actions/deploy-aws
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ${{ secrets.AWS_REGION }}
+      #     aws-cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
