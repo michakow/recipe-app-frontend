@@ -26,6 +26,6 @@ runs:
 
     - name: Deploy AWS PROD
       run: |
-        aws s3 sync ./dist/recipe-app-frontend/browser s3://recipe-app-frontend
+        aws s3 sync ./dist/recipe-app-frontend/browser s3://mk-recipe-app
         aws cloudfront create-invalidation --distribution-id ${{ inputs.aws-cloudfront-distribution-id }} --paths "/*"
       shell: bash
