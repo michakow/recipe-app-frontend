@@ -8,7 +8,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Deploy to Netlify
+    - name: Deploy Netlify DEV
       uses: nwtgck/actions-netlify@v3.0
       with:
         publish-dir: "./dist/recipe-app-frontend/browser"

@@ -8,5 +8,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'New app with Angular v1.0';
+  title = 'New app with Angular v1.0 (AWS)';
 }

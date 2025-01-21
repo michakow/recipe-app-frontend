@@ -16,7 +16,7 @@ runs:
       run: npm install --global vercel@canary
       shell: bash
 
-    - name: Deploy Vercel PROD
+    - name: Deploy Vercel STG
       if: ${{ inputs.mode == 'production' }}
       run: |
         vercel pull --yes --environment=production --token=${{ inputs.vercel-token }}
