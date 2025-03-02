@@ -1,19 +1,27 @@
 import { Routes } from '@angular/router';
-import { HeaderComponent } from './shell';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'recipes',
-    pathMatch: 'full',
-  },
-  {
-    path: 'recipes',
-    title: 'Lista przepisów',
-    component: HeaderComponent,
+    loadComponent: () => import('./shell').then((c) => c.ShellComponent),
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'recipes',
+      },
+      {
+        path: 'recipes',
+        loadChildren: () => import('./recipes').then((r) => r.routes),
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./users').then((r) => r.routes),
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: 'recipes',
+    redirectTo: '',
   },
 ];
