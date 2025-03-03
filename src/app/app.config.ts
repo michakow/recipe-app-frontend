@@ -16,24 +16,34 @@ import {
   provideRouterStore,
   routerReducer,
 } from '@ngrx/router-store';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideKeycloak } from 'keycloak-angular';
 
 import { routes } from './app.routes';
-import { AppInitialConfig, getInitialConfigFactory } from './shared';
+import {
+  AppInitialConfig,
+  initializeAppConfig,
+  initializeKeycloakConfig,
+  keycloakReducer,
+} from './shared';
 
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideAppInitializer(getInitialConfigFactory<AppInitialConfig>()),
-    provideEffects(),
-    provideHttpClient(withInterceptorsFromDi()),
-    provideRouter(routes),
-    provideRouterStore({
-      navigationActionTiming: NavigationActionTiming.PostActivation,
-    }),
-    provideStore({ router: routerReducer }),
-    provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    { provide: LOCALE_ID, useValue: 'pl-PL' },
-  ],
-};
+export function appConfig(config: AppInitialConfig): ApplicationConfig {
+  return {
+    providers: [
+      provideAppInitializer(initializeAppConfig<AppInitialConfig>(config)),
+      provideKeycloak(initializeKeycloakConfig(config)),
+      provideHttpClient(withInterceptorsFromDi()),
+      provideRouter(routes),
+      provideRouterStore({
+        navigationActionTiming: NavigationActionTiming.PostActivation,
+      }),
+      provideStore({ router: routerReducer }),
+      provideState(keycloakReducer),
+      provideEffects(),
+      provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
+      provideZoneChangeDetection({ eventCoalescing: true }),
+      { provide: LOCALE_ID, useValue: 'pl-PL' },
+    ],
+  };
+}
