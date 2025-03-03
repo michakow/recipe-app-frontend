@@ -1,0 +1,9 @@
+{
+  "apiUrl": "http://localhost:3000",
+  "environmentName": "dev",
+  "keycloakConfig": {
+    "url": "http://localhost:8080/auth",
+    "realm": "myrealm",
+    "clientId": "myclient"
+  }
+}

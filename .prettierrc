@@ -2,5 +2,10 @@
   "singleQuote": true,
   "trailingComma": "es5",
   "printWidth": 80,
-  "semi": true
+  "semi": true,
+  "plugins": [
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ]
 }
