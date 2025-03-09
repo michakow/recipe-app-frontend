@@ -25,6 +25,7 @@ import {
   AppInitialConfig,
   initializeAppConfig,
   initializeKeycloakConfig,
+  KeycloakEffects,
   keycloakReducer,
 } from './shared';
 
@@ -40,7 +41,7 @@ export function appConfig(config: AppInitialConfig): ApplicationConfig {
       }),
       provideStore({ router: routerReducer }),
       provideState(keycloakReducer),
-      provideEffects(),
+      provideEffects([KeycloakEffects]),
       provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
       provideZoneChangeDetection({ eventCoalescing: true }),
       { provide: LOCALE_ID, useValue: 'pl-PL' },

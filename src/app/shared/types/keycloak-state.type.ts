@@ -1,9 +1,7 @@
 import { KeycloakTokenParsed } from 'keycloak-js';
 
 export type KeycloakState = {
-  accessTokenExpires: string | null;
-  isLoggedIn: boolean;
-  keycloakEvent: string;
-  refreshTokenExpires: string | null;
+  isReady: boolean;
+  tokenExpiresAt: string | null;
   tokenParsed: KeycloakTokenParsed | null;
 };

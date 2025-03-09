@@ -1,4 +1,9 @@
-import { ProvideKeycloakOptions } from 'keycloak-angular';
+import {
+  AutoRefreshTokenService,
+  ProvideKeycloakOptions,
+  UserActivityService,
+  withAutoRefreshToken,
+} from 'keycloak-angular';
 
 import { AppInitialConfig } from '../types';
 
@@ -17,5 +22,7 @@ export const initializeKeycloakConfig = (
       onLoad: 'login-required',
       checkLoginIframe: false,
     },
+    features: [withAutoRefreshToken()],
+    providers: [AutoRefreshTokenService, UserActivityService],
   };
 };
